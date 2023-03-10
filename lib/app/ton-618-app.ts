@@ -57,6 +57,20 @@ export class Ton618App extends Stack {
     // Create HTTP API Gateway
     const ton618ApiGateway = new apigwv2.HttpApi(this, 'Ton618ApiGateway')
 
+    // API Authorizer
+    const ton618Authorizer = new apigwv2.HttpAuthorizer(
+      this,
+      'Ton618Authorizer',
+      {
+        authorizerName: 'Ton618Authorizer',
+        type: apigwv2.HttpAuthorizerType.JWT,
+        jwtIssuer: process.env.JWT_ISSUER,
+        jwtAudience: [process.env.JWT_AUDIENCE!],
+        httpApi: ton618ApiGateway,
+        identitySource: ['$request.header.Authorization'],
+      }
+    )
+
     // Api Gateway routes
     ton618ApiGateway.addRoutes({
       path: '/blackholes',
@@ -65,6 +79,14 @@ export class Ton618App extends Stack {
         'PostBlackholeRoute',
         postBlackholeLambda
       ),
+      authorizer: {
+        bind() {
+          return {
+            authorizationType: 'JWT',
+            authorizerId: ton618Authorizer.authorizerId,
+          }
+        },
+      },
     })
 
     ton618ApiGateway.addRoutes({
