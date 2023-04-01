@@ -3,7 +3,10 @@
 ## Description 📃
 
 Serverless API for querying/storing information on black holes🕳️ discovered in our universe🌌.
-This API is hosted in AWS and utilizes API Gateway, DynamoDB and Lambda λ services. Both infrastructure and application code are stored in this repository.
+This API is hosted in AWS and utilizes API Gateway, DynamoDB and Lambda λ services. Authorization with JWT can be enabled if needed/wabted. Both infrastructure and application code are stored in this repository. 
+
+![Ton618](https://user-images.githubusercontent.com/81910142/229298520-71e257ed-e4e8-4583-b61a-1fb93ae9736f.png)
+
 
 ## Prerequisities 🛠️
 
