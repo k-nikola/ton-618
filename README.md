@@ -12,7 +12,7 @@ This API is hosted in AWS and utilizes API Gateway, DynamoDB and Lambda λ servi
 
 ```
 ❯ cdk --version
-2.65.0
+2.86.0
 ```
 
 To enable authentication in this app, set up a JWT provider such as Auth0 or AWS Cognito.
