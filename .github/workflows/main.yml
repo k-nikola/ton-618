@@ -32,5 +32,5 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
       - name: Show diff
         run: |
-          sudo npm i && \
-          sudo cdk diff --profile default
+          npm i && \
+          cdk diff
