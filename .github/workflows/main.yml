@@ -1,0 +1,32 @@
+name: Preview changes
+on: push
+env:
+  AWS_REGION: eu-central-1
+  JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
+  JWT_AUDIENCE: ${{ secrets.JWT_AUDIENCE }}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install NodeJS and npm
+        run: |
+          sudo apt update -y && \
+          sudo apt install nodejs npm -y
+      - name: Install AWS CDK
+        run: sudo npm i -g aws-cdk
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.KNDEV_ACTIONS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - name: Show diff
+        run: |
+          sudo npm i && \
+          sudo cdk diff
