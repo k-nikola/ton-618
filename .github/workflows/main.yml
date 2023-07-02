@@ -29,4 +29,5 @@ jobs:
       - name: Show diff
         run: |
           sudo npm i && \
-          sudo cdk diff
+          sudo aws s3 ls && \
+          sudo cdk diff --profile default
