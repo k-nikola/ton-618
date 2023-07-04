@@ -1,13 +1,10 @@
 name: Preview changes
 on:
-  #push
   workflow_dispatch:
 env:
   AWS_REGION: ${{ vars.REGION }}
   JWT_ISSUER: ${{ secrets.JWT_ISSUER }}
   JWT_AUDIENCE: ${{ secrets.JWT_AUDIENCE }}
-  CDK_DEFAULT_REGION: ${{ vars.REGION }}
-  CDK_DEFAULT_ACCOUNT: ${{ secrets.CDK_DEFAULT_ACCOUNT }}
 
 permissions:
   id-token: write
